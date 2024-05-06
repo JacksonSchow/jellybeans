@@ -29,7 +29,10 @@ pip install -r requirements.txt
 ## Configuring the Environment
 
 Create a .env file in the project directory to store environment variables. The .gitignore file already ignores this file.
-If you would like to run this app, you need these variables from me. I would be happy to provide them for prospective employers.
+
+*******************************************************************************
+### If you would like to run this app, you need these variables from me. I would be happy to provide them for prospective employers.
+*******************************************************************************
 
 DJANGO_SECRET_KEY
 POSTGRES_HOST
