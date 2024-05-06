@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+{% comment %} Form for adding new jellybean flavors {% endcomment %}
+<div class="form-page">
+    <h1 class="form-header">New Jellybean Flavor</h1>
+    <form action="{% url 'addflavor' %}" method="post" enctype="multipart/form-data" class="jellybean-form">
+        {% csrf_token %}
+        <div class="form-content">
+            {{ form }}
+        </div>
+        <div class="form-actions">
+            <button type="submit" class="form-button">Submit</button>
+            <a href="{% url 'index' %}" class="form-cancel">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% comment %} Container for page title and button to add new jellybean flavors {% endcomment %}
+    <div class="outer-container">
+        <div class="header-container">
+            <h1 class="title">Welcome to Jellybean Emporium!</h1>
+            <div class="button-add-container">
+                <a href="{% url 'addflavor' %}" class="button-add">Add New Jellybean Flavor</a>
+            </div>
+        </div>
+
+        {% comment %} Container for the dynamically generated cards {% endcomment %}
+        <div class="card-container">
+            {% for jellybean in jellybeans %}
+                <div class="card">
+                    {% if jellybean.s3_image %}
+                        <img src="https://hbll-jellybeans.s3.us-east-2.amazonaws.com/{{ jellybean.s3_image }}" class="s3-image">
+                    {% else %}
+                        <img src="https://hbll-jellybeans.s3.us-east-2.amazonaws.com/no-image-available.jpeg" class="s3-image">
+                    {% endif %}
+                    <div class="card-details">
+                        <h3>{{ jellybean.flavor }}</h3>
+                        <p>Added on {{ jellybean.date_added }}</p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="{% url 'editflavor' pk=jellybean.pk %}" class="button-edit">Edit</a>
+                        <div>
+                            <form action="{% url 'deleteflavor' pk=jellybean.pk %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" onclick="return confirm('Are you sure you would like to delete this flavor?');" class="button-delete">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
